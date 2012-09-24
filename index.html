@@ -9,7 +9,7 @@
 		section {border: 1px solid black; border-radius: 3px; padding: 3px; margin: 5px 0 5px 0; background-color:white}
 		img {max-width:100%;}
 	</style>
-	<meta name="viewport" content="width=device-width; initial-scale=1.0; '" />
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; " />
 </head>
 
 <body>
@@ -25,14 +25,10 @@
 	
 	<div id="content">
 		
-		<section>
-			<h1>We are getting Married!</h1>
-			<p><img src='img/couple.jpg' alt='us'/></p>
-		</section>
-		
 		<section id="about">
 			<h1>About Us</h1>
 			<p>We met at</p>
+			<p><img src='img/couple.jpg' alt='us'/></p>
 		</section>
 		
 		<section id="engagement">
@@ -64,5 +60,23 @@
 	</div>
 	
 	
+	
+	
+	
+	
+	<script type="text/javascript" src="js/prototype.js"></script>
+	<script type="text/javascript">
+	
+		(function () {
+
+			var menu = $('menu').select('a');
+			var sections = $('content').select('section');
+
+			var hideAll = function() { sections.map(function(s){s.hide();});};
+			hideAll();
+			sections[0].show();
+			menu.zip(sections).map(function(t) {t[0].observe('click', function(e) {hideAll(); t[1].show();});});
+		})();
+	</script>
 </body>
 </html>
