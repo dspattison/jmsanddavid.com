@@ -166,6 +166,7 @@
 			hideAll();
 			sections[0].show();
 			menu.zip(sections).map(function(t) {t[0].observe('click', function(e) {hideAll(); t[1].show();});});
+			menu.zip(sections).map(function(t) {if (t[0].getAttribute('href') == window.location.hash) { t[0].click();}});
 		})();
 	</script>
 	
