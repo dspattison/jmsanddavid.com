@@ -63,7 +63,7 @@
 		</section>
 		
 		
-		<section id="pictures">
+		<section id="pictures" style="show:none">
 			<h1>Pictures</h1>
 			<table cellspacing="2" cellpadding="2" width="100%">
      <tr>
@@ -165,15 +165,45 @@
 	<script type="text/javascript">
 	
 		(function () {
-
+			console.group('tabber');
 			var menu = $('menu').select('a');
 			var sections = $('main').select('section');
 
 			var hideAll = function() { sections.map(function(s){s.hide();});};
 			hideAll();
-			sections[0].show();
-			menu.zip(sections).map(function(t) {t[0].observe('click', function(e) {hideAll(); t[1].show();});});
-			menu.zip(sections).map(function(t) {if (t[0].getAttribute('href') == window.location.hash) { t[0].click();}});
+			
+			menu.zip(sections).map(
+				function(t) {
+					t[0].observe('jms:show', function(e) {
+						console.info('jms:show %o', t[0], t[1], e);
+						hideAll();
+						t[1].show();
+						}
+					);
+					t[0].observe('click', function(e) {
+						t[0].fire('jms:show');
+						}
+					);
+				}
+			);
+			
+			var hashHit = false;
+			menu.zip(sections).map(
+				function(t) {
+					console.log(t,t[0].getAttribute('href'), window.location.hash);
+					if (t[0].getAttribute('href') == window.location.hash) {
+						console.info('hit');
+						t[0].click(); 
+						hashHit=true;
+					}
+				}
+			);
+			if (!hashHit) {
+				console.info('show first');
+				//show first
+				menu[0].fire('jms:show');
+			}
+			console.groupEnd();
 		})();
 	</script>
 	
