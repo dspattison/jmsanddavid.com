@@ -9,6 +9,11 @@
 		section {border: 1px solid black; border-radius: 3px; padding: 3px; margin: 5px 0 5px 0; background-color: rgba(255, 255, 255, 0.8);}
 		img {max-width:100%;}
 		
+		figure.picture {
+			display:inline; 
+			float:left;
+			width: 400px;}
+		figcaption{text-align:center};
 	</style>
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; " />
 </head>
@@ -65,89 +70,7 @@
 		
 		<section id="pictures" style="show:none">
 			<h1>Pictures</h1>
-			<table cellspacing="2" cellpadding="2" width="100%">
-     <tr>
-    <td align="center" width="33%">
-     <a href="Pages/20.html"><img border="0" alt="" src="Thumbnails/20.jpg"></a>
-    </td>
-    <td align="center" width="33%">
-     <a href="Pages/2.html"><img border="0" alt="" src="Thumbnails/2.jpg"></a>
-    </td>
-   </tr>
-   <tr>
-    <td align="center" width="33%">
-     <a href="Pages/3.html"><img border="0" alt="" src="Thumbnails/3.jpg"></a>
-    </td>
-    <td align="center" width="33%">
-     <a href="Pages/4.html"><img border="0" alt="" src="Thumbnails/4.jpg"></a>
-    </td>
-   </tr>
-   <tr>
-    <td align="center" width="33%">
-     <a href="Pages/5.html"><img border="0" alt="" src="Thumbnails/5.jpg"></a>
-    </td>
-    <td align="center" width="33%">
-     <a href="Pages/6.html"><img border="0" alt="" src="Thumbnails/6.jpg"></a>
-    </td>
-   </tr>
-   <tr>
-    <td align="center" width="33%">
-     <a href="Pages/7.html"><img border="0" alt="" src="Thumbnails/7.jpg"></a>
-    </td>
-    <td align="center" width="33%">
-     <a href="Pages/8.html"><img border="0" alt="" src="Thumbnails/8.jpg"></a>
-    </td>
-   </tr>
-   <tr>
-    <td align="center" width="33%">
-     <a href="Pages/9.html"><img border="0" alt="" src="Thumbnails/9.jpg"></a>
-    </td>
-    <td align="center" width="33%">
-     <a href="Pages/10.html"><img border="0" alt="" src="Thumbnails/10.jpg"></a>
-    </td>
-   </tr>
-   <tr>
-    <td align="center" width="33%">
-     <a href="Pages/11.html"><img border="0" alt="" src="Thumbnails/11.jpg"></a>
-    </td>
-    <td align="center" width="33%">
-     <a href="Pages/12.html"><img border="0" alt="" src="Thumbnails/12.jpg"></a>
-    </td>
-   </tr>
-   <tr>
-    <td align="center" width="33%">
-     <a href="Pages/13.html"><img border="0" alt="" src="Thumbnails/13.jpg"></a>
-    </td>
-    <td align="center" width="33%">
-     <a href="Pages/14.html"><img border="0" alt="" src="Thumbnails/14.jpg"></a>
-    </td>
-   </tr>
-   <tr>
-    <td align="center" width="33%">
-     <a href="Pages/15.html"><img border="0" alt="" src="Thumbnails/15.jpg"></a>
-    </td>
-    <td align="center" width="33%">
-     <a href="Pages/16.html"><img border="0" alt="" src="Thumbnails/16.jpg"></a>
-    </td>
-   </tr>
-   <tr>
-    <td align="center" width="33%">
-     <a href="Pages/17.html"><img border="0" alt="" src="Thumbnails/17.jpg"></a>
-    </td>
-    <td align="center" width="33%">
-     <a href="Pages/18.html"><img border="0" alt="" src="Thumbnails/18.jpg"></a>
-    </td>
-   </tr>
-   <tr>
-    <td align="center" width="33%">
-     <a href="Pages/19.html"><img border="0" alt="" src="Thumbnails/19.jpg"></a>
-    </td>
-    <td align="center" width="33%">
-     <a href="Pages/1.html"><img border="0" alt="" src="Thumbnails/1.jpg"></a>
-    </td>
-   </tr>
-
-  </table>
+			<!--filled in via javascript -->
 		</section>
 		
 		<section id="registries">
@@ -162,6 +85,64 @@
 	
 	
 	<script type="text/javascript" src="https://s3-us-west-1.amazonaws.com/jmsanddavid.com/js/prototype.js.gz"></script>
+	<script type="text/javascript">
+		(function() {
+			
+			var alreadyShown = false;
+			var p = $('pictures');
+			console.info(p);
+			p.observe('jms:show', function(e) {
+				console.group('picture show');
+				alreadyShown = true;//mutex
+				imgOrder= [20, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 1];
+				captions = {
+					20: "Corrine and Johnny's wedding",
+					2: 'Portillo',
+					4: 'Escape from Alcatraz, We got first place!!',
+					8: 'Snow camping at Echo summit',
+					10: 'Tatooine/Ethiopia',
+					14: 'Tulum runias',
+					17: 'Christening our new place in Long Beach',
+					18: 'Top of Catalina Island',
+					};
+				var imgMarkups = $A();
+				
+				imgOrder.map(function (i) {
+					console.info(i);
+					
+					var f = new Element('figure', {className: 'picture'});
+					f.insert(
+						new Element('a', {href: 'Pages/'+i+'.html'}).insert(
+							new Element('img', {src:"Thumbnails/"+i+".jpg"})
+						)
+					);
+					
+					if (captions[i]) {
+						f.insert(new Element('figcaption').insert(captions[i]));
+					}
+					imgMarkups.push(f);
+				});
+				//.insert(new Element('div',{style:'clear:both'}));
+				console.info(imgMarkups);
+				
+				var row = null;
+				table = new Element('table');
+				imgMarkups.map(function(i) {
+					if (row) {
+						row.insert(new Element('td').insert(i));
+						table.insert(row);
+						row = null;
+					} else {
+						row = new Element('tr');
+						row.insert(new Element('td').insert(i));
+					}
+				});
+				
+				p.insert(table);
+				console.groupEnd();
+			});
+		})();
+	</script>
 	<script type="text/javascript">
 	
 		(function () {
@@ -178,6 +159,7 @@
 						console.info('jms:show %o', t[0], t[1], e);
 						hideAll();
 						t[1].show();
+						t[1].fire('jms:show');
 						}
 					);
 					t[0].observe('click', function(e) {
@@ -193,7 +175,7 @@
 					console.log(t,t[0].getAttribute('href'), window.location.hash);
 					if (t[0].getAttribute('href') == window.location.hash) {
 						console.info('hit');
-						t[0].click(); 
+						t[0].fire('jms:show');
 						hashHit=true;
 					}
 				}
