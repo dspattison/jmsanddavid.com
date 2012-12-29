@@ -93,17 +93,25 @@
 			console.info(p);
 			p.observe('jms:show', function(e) {
 				console.group('picture show');
+				if (alreadyShown) {
+					console.groupEnd();
+					return;
+				}
+				
 				alreadyShown = true;//mutex
+				
 				imgOrder= [20, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 1];
 				captions = {
 					20: "Corrine and Johnny's wedding",
-					2: 'Portillo',
+					2: 'Skiing at Portillo, Chile',
 					4: 'Escape from Alcatraz, We got first place!!',
+					6: 'Biking in Tahoe Donner on New Year\'s Eve',
 					8: 'Snow camping at Echo summit',
-					10: 'Tatooine/Ethiopia',
-					14: 'Tulum runias',
+					10: 'Jeanne-Marie in Ethiopia petting the Banthas',
+					14: 'The Ruins at Tulum, Mexico',
 					17: 'Christening our new place in Long Beach',
 					18: 'Top of Catalina Island',
+					19: 'Mountain Biking in Mammoth',
 					};
 				var imgMarkups = $A();
 				
@@ -128,6 +136,7 @@
 				var row = null;
 				table = new Element('table');
 				imgMarkups.map(function(i) {
+				    console.debug(i);
 					if (row) {
 						row.insert(new Element('td').insert(i));
 						table.insert(row);
