@@ -33,8 +33,9 @@
 	<div id="main">
 		
 		<section id="">
-			<h1>We are getting married!</h1>
+			<h1>Jeanne-Marie and David are getting married!</h1>
 			<h2>Save the Date! September 21-22, 2013</h2>
+			<p>Wedding <span id='countdown'></span> Days away!</p>
 			<p><img src='img/couple.jpg' alt='us'/></p>
 		</section>
 		
@@ -55,11 +56,11 @@
 		
 		
 		<section id="location">
-			<h1>Location</h1>
 			<figure style='float:right'>
 				<img src='img/at_lodge.jpg'/>
 				<figcaption>Two Skiers enjoying Foudue at the Village lodge.</figcaption>
 			</figure>
+			<h1>Location</h1>
 			<p>
 			Sugar Bowl Ski Resort<br/> 
 			Norden, CA<br/>
@@ -88,6 +89,8 @@ available for your guests on the day of your wedding.
 11:00 a.m. Sunday. Check out time may be extended for bride and groom
 on this day upon availability.
 </p>
+
+<p><srong>Reservations:</strong> (530) 426-6742.</p>
 
 			<p style='float:left; margin-right: 20px'>
 			<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Sugar+Bowl+Ski+Resort,+Sugar+Bowl+Road,+Truckee,+CA&amp;aq=1&amp;oq=Sugar+bowl,+Ca&amp;sll=33.776864,-118.155899&amp;sspn=0.325325,0.674286&amp;t=m&amp;ie=UTF8&amp;hq=Sugar+Bowl+Ski+Resort,+Sugar+Bowl+Road,&amp;hnear=Truckee,+Nevada,+California&amp;cid=15196496299948665621&amp;ll=39.379426,-120.323639&amp;spn=0.185763,0.291824&amp;z=11&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Sugar+Bowl+Ski+Resort,+Sugar+Bowl+Road,+Truckee,+CA&amp;aq=1&amp;oq=Sugar+bowl,+Ca&amp;sll=33.776864,-118.155899&amp;sspn=0.325325,0.674286&amp;t=m&amp;ie=UTF8&amp;hq=Sugar+Bowl+Ski+Resort,+Sugar+Bowl+Road,&amp;hnear=Truckee,+Nevada,+California&amp;cid=15196496299948665621&amp;ll=39.379426,-120.323639&amp;spn=0.185763,0.291824&amp;z=11" style="color:#0000FF;text-align:left">View Larger Map</a></small>
@@ -249,6 +252,20 @@ on this day upon availability.
 			}
 			console.groupEnd();
 		})();
+	</script>
+	
+	<script type="text/javascript">
+	(function () {
+		var c = $('countdown');
+		var dDay = new Date(2013, 9, 21, 14, 0, 0, 0);
+		var setSpan = function() {
+			var delta = dDay.getTime() - (new Date()).getTime();
+			var deltaDays = Math.round(delta/(3600*24)/1000);
+			c.update(deltaDays);
+		};
+		setSpan();
+		setInterval(setSpan, 100000);
+	})();
 	</script>
 	
 </body>
