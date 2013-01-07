@@ -79,6 +79,7 @@
 					<li>Skiing
 					<li>and of course, pizza
 				</ul>
+				<img src='Thumbnails/3.jpg'/>
 			</p>
 
 			
@@ -149,8 +150,8 @@ on this day upon availability.
 
 <p><srong>Reservations:</strong> (530) 426-6742.</p>
 
-			<p style='float:left; margin-right: 20px'>
-			<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Sugar+Bowl+Ski+Resort,+Sugar+Bowl+Road,+Truckee,+CA&amp;aq=1&amp;oq=Sugar+bowl,+Ca&amp;sll=33.776864,-118.155899&amp;sspn=0.325325,0.674286&amp;t=m&amp;ie=UTF8&amp;hq=Sugar+Bowl+Ski+Resort,+Sugar+Bowl+Road,&amp;hnear=Truckee,+Nevada,+California&amp;cid=15196496299948665621&amp;ll=39.379426,-120.323639&amp;spn=0.185763,0.291824&amp;z=11&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Sugar+Bowl+Ski+Resort,+Sugar+Bowl+Road,+Truckee,+CA&amp;aq=1&amp;oq=Sugar+bowl,+Ca&amp;sll=33.776864,-118.155899&amp;sspn=0.325325,0.674286&amp;t=m&amp;ie=UTF8&amp;hq=Sugar+Bowl+Ski+Resort,+Sugar+Bowl+Road,&amp;hnear=Truckee,+Nevada,+California&amp;cid=15196496299948665621&amp;ll=39.379426,-120.323639&amp;spn=0.185763,0.291824&amp;z=11" style="color:#0000FF;text-align:left">View Larger Map</a></small>
+			<p style='float:left; margin-right: 20px' id='map'>
+			
 			</p>
 			<p style='min-width:400px'>
 			<!-- the &nbsp; forces the browser to put this on one line only -->
@@ -279,6 +280,27 @@ on this day upon availability.
 			});
 		})();
 	</script>
+	
+	<script type='text/javascript'>
+		(function () {
+			var mapHtml = '<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Sugar+Bowl+Ski+Resort,+Sugar+Bowl+Road,+Truckee,+CA&amp;aq=1&amp;oq=Sugar+bowl,+Ca&amp;sll=33.776864,-118.155899&amp;sspn=0.325325,0.674286&amp;t=m&amp;ie=UTF8&amp;hq=Sugar+Bowl+Ski+Resort,+Sugar+Bowl+Road,&amp;hnear=Truckee,+Nevada,+California&amp;cid=15196496299948665621&amp;ll=39.379426,-120.323639&amp;spn=0.185763,0.291824&amp;z=11&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Sugar+Bowl+Ski+Resort,+Sugar+Bowl+Road,+Truckee,+CA&amp;aq=1&amp;oq=Sugar+bowl,+Ca&amp;sll=33.776864,-118.155899&amp;sspn=0.325325,0.674286&amp;t=m&amp;ie=UTF8&amp;hq=Sugar+Bowl+Ski+Resort,+Sugar+Bowl+Road,&amp;hnear=Truckee,+Nevada,+California&amp;cid=15196496299948665621&amp;ll=39.379426,-120.323639&amp;spn=0.185763,0.291824&amp;z=11" style="color:#0000FF;text-align:left">View Larger Map</a></small>';
+			var alreadyShown = false;
+			var mDiv = $('map');
+			console.info(mDiv);
+			$('location').observe('jms:show', function(e) {
+				console.group('map show');
+				if (alreadyShown) {
+					console.groupEnd();
+					return;
+				}
+				
+				alreadyShown = true;//mutex
+				
+				mDiv.innerHTML = mapHtml;
+			});
+		})();
+	</script>
+	
 	<script type="text/javascript">
 	
 		(function () {
