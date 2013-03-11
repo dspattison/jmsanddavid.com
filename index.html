@@ -15,7 +15,7 @@
 			margin: 5px 0 5px 0;
 			background-color: white !important; 
 			background-color: rgba(255, 255, 255, 0.8) !important;
-			overflow: scroll;
+			overflow-x: scroll;
 			}
 		img {max-width:100%; height:auto}
 		
@@ -298,7 +298,7 @@ on this day upon availability.
 			
 			var alreadyShown = false;
 			var p = $('pictures');
-			console.info(p);
+			//console.info(p);
 			p.observe('jms:show', function(e) {
 				if (alreadyShown) {
 					return;
@@ -322,7 +322,7 @@ on this day upon availability.
 				var imgMarkups = $A();
 				
 				imgOrder.map(function (i) {
-					console.info(i);
+					//console.info(i);
 					
 					var f = new Element('figure', {className: 'picture'});
 					f.insert(
@@ -341,7 +341,7 @@ on this day upon availability.
 				var row = null;
 				table = new Element('table');
 				imgMarkups.map(function(i) {
-				    console.info(i);
+				    //console.info(i);
 					if (row) {
 						row.insert(new Element('td').insert(i));
 						table.insert(row);
@@ -362,7 +362,7 @@ on this day upon availability.
 			var mapHtml = '<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Sugar+Bowl+Ski+Resort,+Sugar+Bowl+Road,+Truckee,+CA&amp;aq=1&amp;oq=Sugar+bowl,+Ca&amp;sll=33.776864,-118.155899&amp;sspn=0.325325,0.674286&amp;t=m&amp;ie=UTF8&amp;hq=Sugar+Bowl+Ski+Resort,+Sugar+Bowl+Road,&amp;hnear=Truckee,+Nevada,+California&amp;cid=15196496299948665621&amp;ll=39.379426,-120.323639&amp;spn=0.185763,0.291824&amp;z=11&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Sugar+Bowl+Ski+Resort,+Sugar+Bowl+Road,+Truckee,+CA&amp;aq=1&amp;oq=Sugar+bowl,+Ca&amp;sll=33.776864,-118.155899&amp;sspn=0.325325,0.674286&amp;t=m&amp;ie=UTF8&amp;hq=Sugar+Bowl+Ski+Resort,+Sugar+Bowl+Road,&amp;hnear=Truckee,+Nevada,+California&amp;cid=15196496299948665621&amp;ll=39.379426,-120.323639&amp;spn=0.185763,0.291824&amp;z=11" style="color:#0000FF;text-align:left">View Larger Map</a></small>';
 			var alreadyShown = false;
 			var mDiv = $('map');
-			console.info(mDiv);
+			//console.info(mDiv);
 			$('location').observe('jms:show', function(e) {
 				if (alreadyShown) {
 					return;
@@ -382,12 +382,12 @@ on this day upon availability.
 			var sections = $('main').select('.section');
 
 			var hideAll = function() { sections.map(function(s){s.hide();});};
-			hideAll();
+			//hideAll();
 			
 			menu.zip(sections).map(
 				function(t) {
 					t[0].observe('jms:show', function(e) {
-						console.info('jms:show %o', t[0], t[1], e);
+						//console.info('jms:show %o', t[0], t[1], e);
 						hideAll();
 						t[1].show();
 						t[1].fire('jms:show');
@@ -403,16 +403,16 @@ on this day upon availability.
 			var hashHit = false;
 			menu.zip(sections).map(
 				function(t) {
-					console.log(t,t[0].getAttribute('href'), window.location.hash);
+					//console.log(t,t[0].getAttribute('href'), window.location.hash);
 					if (t[0].getAttribute('href') == window.location.hash) {
-						console.info('hit');
+						//console.info('hit');
 						t[0].fire('jms:show');
 						hashHit=true;
 					}
 				}
 			);
 			if (!hashHit) {
-				console.info('show first');
+				//console.info('show first');
 				//show first
 				menu[0].fire('jms:show');
 			}
