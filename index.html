@@ -42,7 +42,6 @@
 			<li><a href="#party">Wedding Party</a></li>
 			<li><a href="#location">Location</a></li>
 			<li><a href="#pictures">Pictures</a></li>
-			<li><a href="http://www.theilenproofs.com/jd-pattison">Engagement Pictures</a></li>
 			<li><a href="#registries">Registries</a></li>
 		</ul>
 	</div>
@@ -277,11 +276,8 @@ on this day upon availability.
 		
 		<div class='section' id="pictures" style="show:none">
 			<h1>Pictures</h1>
-			<!--filled in via javascript -->
-		</div>
-		
-		<div class='section' id="eng-pic" style="show:none">
-			<h1>Engagement Pictures</h1>
+			<h3><a href="http://www.theilenproofs.com/jd-pattison">Click here to view official engagement photos.</a></h3>
+			
 			<!--filled in via javascript -->
 		</div>
 		
@@ -361,33 +357,6 @@ on this day upon availability.
 				p.insert(table);
 			});
 		})();
-	</script>
-	
-	<script type='text/javascript'>
-		var alreadyShown = false;
-		var p = $('eng-pic');
-		//console.info(p);
-		p.observe('jms:show', function(e) {
-			if (alreadyShown) {
-				return;
-			}
-			
-			alreadyShown = true;//mutex
-			
-			
-			$R(1,83).map(function(i) {
-				//need sprintf("%4d",i);
-				if (i < 10) {
-					number = "000"+i;
-				} else {
-					number = "00"+i;
-				}
-				
-				url = "img/engagement/JD-Pattison-"+number+".jpg"
-				p.insert(new Element('img', {src:url}));
-			});
-			
-		});//end observe
 	</script>
 	
 	<script type='text/javascript'>
