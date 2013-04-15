@@ -8,6 +8,8 @@
 		#main { margin-left: 100px; max-width:1200px; }
 		#menu {position:fixed; top:0; left:0;width:100px; padding:0; text-align:center;}
 		#menu ul { list-style:none;-webkit-padding-start: 0; padding:0}
+		.hide-menu #main { margin-left:0}
+		.hide-menu #menu {left:-12125px; display:none;}
 		div.section {
 			border: 1px solid black; 
 			border-radius: 3px; 
@@ -44,6 +46,7 @@
 			<li><a href="#pictures">Pictures</a></li>
 			<li><a href="#registries">Registries</a></li>
 		</ul>
+		<a href="javascript:" class="hide-menu-button">&lt;&lt; Hide</a>
 	</div>
 	
 	<div id="main">
@@ -385,7 +388,7 @@ on this day upon availability.
 	<script type="text/javascript">
 	
 		(function () {
-			var menu = $('menu').select('a');
+			var menu = $('menu').down('ul').select('a');
 			var sections = $('main').select('.section');
 
 			var hideAll = function() { sections.map(function(s){s.hide();});};
@@ -438,6 +441,10 @@ on this day upon availability.
 		setSpan();
 		setInterval(setSpan, 100000);
 	})();
+	</script>
+	
+	<script type="text/javascript">
+		$('menu').down('.hide-menu-button').observe('click', function(e) {document.body.addClassName('hide-menu')});
 	</script>
 	
 </body>
